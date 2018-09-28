@@ -8,21 +8,21 @@ public class DrawAxes : MonoBehaviour {
     private Transform xPoint, yPoint;
     float x, y;
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         int i = 0;
         x = 0;
         y = 0;
-        xPoint = Instantiate(pointPrefab);
-        yPoint = Instantiate(pointPrefab);
+        xPoint = Instantiate(pointPrefab, gameObject.transform);
+        yPoint = Instantiate(pointPrefab, gameObject.transform);
         xPoint.localPosition = transform.position;
         yPoint.localPosition = transform.position;
-        while(i <1000){
+        while(i < 1000){
             x = i * .1f;
             y = i * .1f;
-            xPoint = Instantiate(pointPrefab);
+            xPoint = Instantiate(pointPrefab, gameObject.transform);
             xPoint.localPosition = transform.position + new Vector3(x, 0, 0);
-            yPoint = Instantiate(pointPrefab);
+            yPoint = Instantiate(pointPrefab, gameObject.transform);
             yPoint.localPosition = transform.position + new Vector3(0, y, 0);
             i++;
         }

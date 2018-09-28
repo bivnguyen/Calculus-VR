@@ -13,14 +13,14 @@ public class Graph : MonoBehaviour {
         GameObject sphereObject = GameObject.FindWithTag("Ball");
         graphValues = sphereObject.GetComponent<GetGraphValues>();
         time = 0;
-        point = Instantiate(pointPrefab);
+        point = Instantiate(pointPrefab, gameObject.transform);
         point.localPosition = transform.position + new Vector3(time, graphValues.graph_values.y, 0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
         time = time + Time.deltaTime;
-        point = Instantiate(pointPrefab);
+        point = Instantiate(pointPrefab, gameObject.transform);
         point.localPosition = transform.position + new Vector3(time, graphValues.graph_values.y, 0);
 
     }

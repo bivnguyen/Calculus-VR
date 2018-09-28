@@ -12,6 +12,7 @@ public class GetGraphValues : MonoBehaviour {
     private float curr_velocity;
     private float prev_velocity;
     float accel;
+
     void Start () {
         rb = GetComponent<Rigidbody>();
         curr_velocity = 0;
