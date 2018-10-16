@@ -10,7 +10,7 @@ public class GetGraphValues : MonoBehaviour {
     public float arclength;
     float delta_time;
     public Vector3 graph_values;
-    private Vector3 velocity_vector;
+    public Vector3 velocity_vector;
     private float curr_velocity;
     private float prev_velocity;
     private float accel;
@@ -25,12 +25,14 @@ public class GetGraphValues : MonoBehaviour {
     private float deltaZ;
     public float Xvelocity;
     public float Yvelocity;
+    public float Zvelocity;
 
 
     void Start () {
         rb = GetComponent<Rigidbody>();
         curr_velocity = 0;
         prev_velocity = 0;
+        velocity_vector = Vector3.zero;
         newX = transform.position.x;
         newY = transform.position.y;
         newZ = transform.position.z;
@@ -39,6 +41,10 @@ public class GetGraphValues : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+    }
+    private void FixedUpdate()
+    {
         oldX = newX;
         oldY = newY;
         oldZ = newZ;
@@ -47,28 +53,27 @@ public class GetGraphValues : MonoBehaviour {
         newY = transform.position.y;
         newZ = transform.position.z;
 
-        deltaX = Mathf.Abs(newX - oldX);
-        deltaY = Mathf.Abs(newY - oldY);
-        deltaZ = Mathf.Abs(newZ - oldZ);
+        deltaX = newX - oldX;
+        deltaY = newY - oldY;
+        deltaZ = newZ - oldZ;
 
         arclength = Mathf.Sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) + arclength;
 
-        delta_time = Time.deltaTime;
-        prev_velocity = curr_velocity;
-        velocity_vector = rb.velocity;
-        curr_velocity = velocity_vector.magnitude;
-        accel = (curr_velocity - prev_velocity) / delta_time;
-        graph_values.x = 0;
-        graph_values.y = curr_velocity;
-        graph_values.z = accel;
+        delta_time = Time.fixedDeltaTime;
 
-        Xvelocity = rb.velocity.x;
-        Yvelocity = rb.velocity.y;
+        velocity_vector.x = deltaX / delta_time;
+        velocity_vector.y = deltaY / delta_time;
+        velocity_vector.z = deltaZ / delta_time;
 
-        Debug.Log(graph_values);
-        Debug.Log(arclength);
-        Debug.Log(Xvelocity);
-        Debug.Log(Yvelocity);
-	}
-   
+
+        //Xvelocity = rb.velocity.x;
+        //Yvelocity = rb.velocity.y;
+
+        //Debug.Log(arclength);
+        Debug.Log("X Velocity");
+        Debug.Log(velocity_vector.x);
+        Debug.Log("Y Velocity");
+        Debug.Log(velocity_vector.y);
+    }
+
 }
