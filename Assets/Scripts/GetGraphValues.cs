@@ -39,6 +39,11 @@ public class GetGraphValues : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+	}
+
+    private void FixedUpdate()
+    {
         oldX = newX;
         oldY = newY;
         oldZ = newZ;
@@ -53,7 +58,7 @@ public class GetGraphValues : MonoBehaviour {
 
         arclength = Mathf.Sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) + arclength;
 
-        delta_time = Time.deltaTime;
+        delta_time = Time.fixedDeltaTime;
         prev_velocity = curr_velocity;
         velocity_vector = rb.velocity;
         curr_velocity = velocity_vector.magnitude;
@@ -69,6 +74,6 @@ public class GetGraphValues : MonoBehaviour {
         Debug.Log(arclength);
         Debug.Log(Xvelocity);
         Debug.Log(Yvelocity);
-	}
-   
+    }
+
 }
